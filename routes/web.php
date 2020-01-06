@@ -13,13 +13,14 @@
 
 Route::get('/','userController@timu');
 
-Route::get('/user', function () {
-    return view('user');
+Route::get('/make', function () {
+    return view('make');
 });
 
 
+Route::any('/makeWenjuan', 'userController@makeWenjuan');
 
-Route::any('/back/test', 'userController@test');
+Route::any('/back/doMakeWenjuan', 'userController@doMakeWenjuan');
 Route::any('/back/saveAnswer', 'userController@saveAnswer');
 Route::any('/back/listAnswers', 'userController@listAnswers');
 

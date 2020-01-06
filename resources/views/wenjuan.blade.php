@@ -9,18 +9,19 @@
         @if($timu)
             <form action="{{url('/back/saveAnswer')}}"  method="post">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
-                @foreach($timu['xuanze_list'] as $ti_num=>$ti)
+                @foreach($timu['xuanze_list']??[] as $ti_num=>$ti)
                     {{$ti['q']}}<br>
-                    @foreach($ti['as'] as $a_num=>$a)
+                    @foreach($ti['as']??[] as $a_num=>$a)
                         <input type="radio" name="xuanze_{{$ti_num}}" value="{{$a_num}}">{{$a}}<br>
                     @endforeach
 
                     <br><br>
                 @endforeach
 
-                @foreach($timu['tiankong_list'] as $ti_num=>$ti)
+                @foreach($timu['tiankong_list']??[] as $ti_num=>$ti)
                     {{$ti}}<br>
                     <textarea name="tiankong_{{$ti_num}}"></textarea>
+                    <br><br>
                 @endforeach
 
                 <br><br>
