@@ -89,7 +89,7 @@
         <div class="tiankong-list">
             <h3>填空</h3>
         </div>
-        管理员密码：<input type="password" name="pwd"/><br>
+        管理员密码：<input type="text" name="pwd"/><br>
         <input type="submit" value="提交"/>
     </form>
     </body>

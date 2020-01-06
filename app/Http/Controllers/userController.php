@@ -36,7 +36,53 @@ class userController extends Controller
     }
 
     public function listAnswers(){
-        return Redis::get('answers');
+
+        $answers = Redis::get('answers');
+
+        $answers = $answers ? json_decode($answers,true) : [];
+
+        $data = [];
+
+        foreach ($answers as $answer){
+            $personData = [];
+            $personData []= $answer['name'];
+            $personData []= $answer['phone'];
+            foreach ($answer['xuanze'] as $x){
+                $personData []= $x;
+            }
+            foreach ($answer['tiankong'] as $x){
+                $personData []= $x;
+            }
+            $data []= $personData;
+        }
+
+        return self::makeTable($data);
+    }
+
+    protected function makeTable($data){
+        $head []= '姓名';
+        $head []= '手机号';
+        $timus = json_decode(Redis::get('timu'),true);
+        $str = "<table>";
+        $str.="<tr>";
+        $str.="<th>姓名</th>";
+        $str.="<th>手机号</th>";
+        foreach ($timus['xuanze_list'] as $k=>$v){
+            $str.="<th>选择".($k+1)."</th>";
+        }
+        foreach ($timus['tiankong_list'] as $k=>$v){
+            $str.="<th>填空".($k+1)."</th>";
+        }
+
+        foreach ($data as $answer){
+            $str.="<tr>";
+            foreach ($answer as $v){
+                $str .= "<td>{$v}</td>";
+            }
+            $str.="</tr>";
+        }
+        $str .= "</table>";
+        return $str;
     }
 
     public function makeWenjuan(){
