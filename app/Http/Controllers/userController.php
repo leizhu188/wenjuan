@@ -36,6 +36,7 @@ class userController extends Controller
     }
 
     public function timu(){
+        dd(3232);
         $timu = Redis::get('timu');
         return view('wenjuan',['timu'=>json_decode($timu,true)]);
     }
